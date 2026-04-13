@@ -1,18 +1,13 @@
 {
-    "compilerOptions": {
-        "allowJs": true,
-        "noImplicitAny": false,
-        "noUnusedLocals": false,
-        "noUnusedParameters": false,
-        "skipLibCheck": true,
-        "strictNullChecks": true,
-        "paths": {
-            "@/*": ["./src/*"],
-        },
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
     },
-    "files": [],
-    "references": [
-        { "path": "./tsconfig.app.json" },
-        { "path": "./tsconfig.node.json" },
-    ],
+    "jsx": "react-jsx",
+    "ignoreDeprecations": "6.0",
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "include": ["src"]
 }
