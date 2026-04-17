@@ -1,13 +1,14 @@
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
+    "compilerOptions": {
+        "baseUrl": ".",
+        "ignoreDeprecations": "6.0",
+        "jsx": "react-jsx",
+        "skipLibCheck": true,
+        "strictNullChecks": true,
+        "allowImportingTsExtensions": true,
+        "paths": {
+            "@/*": ["./src/*"],
+        },
     },
-    "jsx": "react-jsx",
-    "ignoreDeprecations": "6.0",
-    "strict": true,
-    "skipLibCheck": true
-  },
-  "include": ["src"]
+    "include": ["src"],
 }

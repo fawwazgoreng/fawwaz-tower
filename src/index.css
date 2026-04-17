@@ -1,8 +1,6 @@
 @import "tailwindcss";
 
-/* Pastikan path ini benar: naik satu tingkat ke root */
 @config "../tailwind.config.ts";
-
 
 @layer base {
     :root {

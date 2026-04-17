@@ -27,7 +27,7 @@ export const ThemeToggle = () => {
             animate={{ opacity: 0.8 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[9999] pointer-events-none bg-primary/30"
+            className="fixed inset-0 z-9999 pointer-events-none bg-primary/30"
           />
         )}
       </AnimatePresence>
