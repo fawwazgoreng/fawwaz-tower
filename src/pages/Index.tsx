@@ -5,6 +5,7 @@ import { Building2 } from "lucide-react";
 import { useState } from "react";
 import { TowerMode } from "@/components/elements/TowerMode";
 import Floor100_Creator from "@/components/sections/Floor100_Creator";
+import { JourneySection } from "@/components/sections/Floor75_Journey";
 
 export default function LandingPage() {
     const [towerMode, setTowerMode] = useState(false);
@@ -26,7 +27,8 @@ export default function LandingPage() {
             <motion.div
                 animate={towerMode ? {opacity: 1, scale: 1} : {opacity: 1, scale: 0.95}}
             >
-            <Floor100_Creator />
+                <Floor100_Creator />
+                <JourneySection />
             </motion.div>
         </>
     );

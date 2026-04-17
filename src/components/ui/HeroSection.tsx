@@ -252,13 +252,7 @@ export const HeroSection = () => {
                     </motion.button>
                 </div>
 
-                <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20 w-full max-w-6xl mx-auto px-4">
-                    {/* Sisi Kiri / Atas: Status Window */}
-                    <div className="w-full lg:w-auto flex justify-center">
-                        <StatusWindow />
-                    </div>
-
-                    {/* Sisi Kanan / Bawah: Profile Card */}
+                <div className="flex lg:flex-row-reverse flex-col items-center justify-center gap-12 lg:gap-20 w-full max-w-6xl mx-auto px-4">
                     <motion.div
                         initial={{ scale: 0.8, opacity: 0, rotateY: -15 }}
                         animate={{ scale: 1, opacity: 1, rotateY: 0 }}
@@ -344,6 +338,11 @@ export const HeroSection = () => {
                             style={{ animationDelay: "2s" }}
                         />
                     </motion.div>
+                    
+                    <div className="w-full lg:w-auto flex justify-center">
+                        <StatusWindow />
+                    </div>
+
                 </div>
             </div>
             <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-background to-transparent" />
