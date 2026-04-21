@@ -7,12 +7,20 @@ interface TowerModeProps {
 }
 
 const floors = [
-  { floor: 100, label: "The Creator", section: "creator", rank: "SSS", color: "text-primary" },
-  { floor: 75, label: "The Journey", section: "journey", rank: "SS", color: "text-secondary" },
-  { floor: 50, label: "The Creation", section: "creation", rank: "S", color: "text-primary" },
-  { floor: 25, label: "The Ascent", section: "ascent", rank: "A", color: "text-accent" },
-  { floor: 0, label: "The Portal", section: "portal", rank: "B", color: "text-destructive" },
+  { floor: 100, label: "The Creator",  section: "creator",  stars: 6, color: "text-primary",   dotColor: "hsl(var(--primary))"   },
+  { floor: 75,  label: "The Journey",  section: "journey",  stars: 5, color: "text-secondary",  dotColor: "hsl(var(--secondary))" },
+  { floor: 50,  label: "The Creation", section: "creation", stars: 4, color: "text-accent",     dotColor: "hsl(var(--accent))"    },
+  { floor: 25,  label: "The Ascent",   section: "ascent",   stars: 2, color: "text-muted-foreground", dotColor: "hsl(var(--muted-foreground))" },
+  { floor: 0,   label: "The Portal",   section: "portal",   stars: 1, color: "text-destructive", dotColor: "hsl(var(--destructive))" },
 ];
+
+// widths & heights for the pyramid tower blocks (index 0 = top/Floor 100)
+const towerWidths = ["md:w-20 w-14", "md:w-28 w-20", "md:w-36 w-28", "md:w-44 w-36", "md:w-52 w-44"];
+const towerHeights = ["h-12",  "h-14",  "h-16", "h-18", "h-20"];
+
+const StarRank = ({ count, className }: { count: number; className?: string }) => (
+  <span className={className}>{"★".repeat(count)}</span>
+);
 
 export const TowerMode = ({ active, onClose }: TowerModeProps) => {
   const scrollTo = (id: string) => {
@@ -32,7 +40,7 @@ export const TowerMode = ({ active, onClose }: TowerModeProps) => {
           transition={{ duration: 0.5 }}
           className="fixed inset-0 z-60 bg-background/98 backdrop-blur-xl flex flex-col items-center justify-center"
         >
-          {/* Close button */}
+          {/* Close */}
           <motion.button
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -48,7 +56,7 @@ export const TowerMode = ({ active, onClose }: TowerModeProps) => {
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-center mb-12"
+            className="text-center mb-10"
           >
             <span className="font-heading text-[10px] tracking-[0.4em] uppercase text-primary/60">
               ⟨ Tower Progression System ⟩
@@ -58,65 +66,117 @@ export const TowerMode = ({ active, onClose }: TowerModeProps) => {
             </h2>
           </motion.div>
 
-          {/* Vertical progression */}
-          <div className="relative flex flex-col items-center gap-0">
-            {/* Progress bar line */}
+          {/* Main Layout: Tower Visual + Connector + Floor List */}
+          <div className="flex items-center gap-10 md:gap-14">
+
+            {/* Tower Visual (pyramid) */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="flex flex-col items-center"
+            >
+              {floors.map((f, i) => (
+                <button
+                  key={f.floor}
+                  onClick={() => scrollTo(f.section)}
+                  className={`
+                    relative group flex items-center justify-center
+                    ${towerWidths[i]} ${towerHeights[i]}
+                    -mt-px first:mt-0
+                    border-l border-r border-t last:border-b
+                    border-current/20
+                    bg-linear-to-b from-muted/40 to-card
+                    rounded-t-sm
+                    first:rounded-t-md last:rounded-b-md
+                    transition-all duration-300
+                    hover:brightness-125
+                    ${f.color}
+                  `}
+                >
+                  <StarRank
+                    count={f.stars}
+                    className="text-[9px] tracking-[0.15em] opacity-60 group-hover:opacity-100 transition-opacity"
+                  />
+                </button>
+              ))}
+              {/* Glow base */}
+              <div className="w-44 h-3 mt-1 rounded-full bg-primary/10 blur-lg" />
+            </motion.div>
+
+            {/* Connector line */}
             <motion.div
               initial={{ scaleY: 0 }}
               animate={{ scaleY: 1 }}
-              transition={{ duration: 1, delay: 0.3 }}
-              className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-0.5 origin-top"
+              transition={{ duration: 0.8, delay: 0.35 }}
+              className="self-stretch w-px origin-top"
               style={{
                 background: "linear-gradient(to bottom, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)))",
               }}
             />
 
-            {floors.map((f, i) => (
-              <motion.button
-                key={f.floor}
-                initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 + i * 0.15 }}
-                onClick={() => scrollTo(f.section)}
-                className="relative flex items-center gap-4 py-4 group cursor-pointer"
-              >
-                {/* Node dot */}
-                <div className="relative z-10">
-                  <div className={`w-4 h-4 rounded-full border-2 border-current ${f.color} bg-background group-hover:scale-125 transition-transform`} />
-                  <div className={`absolute inset-0 rounded-full ${f.color} opacity-0 group-hover:opacity-40 blur-md transition-opacity`} />
-                </div>
+            {/* Floor List */}
+            <div className="flex flex-col">
+              {floors.map((f, i) => (
+                <motion.button
+                  key={f.floor}
+                  initial={{ opacity: 0, x: 40 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.45 + i * 0.12 }}
+                  onClick={() => scrollTo(f.section)}
+                  className="relative flex items-center gap-3 px-3 py-3.5 rounded-lg group cursor-pointer hover:bg-muted/30 transition-all"
+                >
+                  {/* Node dot */}
+                  <div className="relative z-10 shrink-0">
+                    <div
+                      className={`w-2.5 h-2.5 rounded-full border-2 border-current ${f.color} bg-background group-hover:scale-125 transition-transform`}
+                    />
+                    <div
+                      className={`absolute inset-0 rounded-full ${f.color} opacity-0 group-hover:opacity-40 blur-sm transition-opacity`}
+                    />
+                  </div>
 
-                {/* Floor info */}
-                <div className="text-left min-w-50 bg-card/80 backdrop-blur-sm border border-border rounded-lg px-4 py-3 group-hover:border-primary/40 transition-all">
-                  <div className="flex items-center gap-2 mb-0.5">
-                    <span className="font-heading text-[10px] tracking-wider text-muted-foreground">
-                      FLOOR {f.floor}
-                    </span>
-                    <span className={`font-heading text-[10px] font-black px-1.5 py-0.5 rounded ${f.color} bg-muted`}>
-                      {f.rank}
+                  {/* Info */}
+                  <div className="flex flex-col gap-0.5 text-left">
+                    <div className="flex items-center gap-2">
+                      <span className="font-heading md:text-[12px] text-[9px] tracking-wider text-muted-foreground uppercase">
+                        Floor {f.floor}
+                      </span>
+                      <StarRank
+                        count={f.stars}
+                        className={`font-heading md:text-[12px] text-[9px] font-black px-1.5 py-0.5 rounded bg-muted ${f.color}`}
+                      />
+                    </div>
+                    <span className="font-heading font-bold md:text-xl text-sm text-foreground">
+                      {f.label}
                     </span>
                   </div>
-                  <span className="font-heading font-bold text-sm text-foreground">{f.label}</span>
-                </div>
-              </motion.button>
-            ))}
+                </motion.button>
+              ))}
+            </div>
           </div>
 
-          {/* Rank system legend */}
+          {/* Rank Legend */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2 }}
-            className="mt-12 flex gap-3"
+            className="mt-10 flex gap-2 flex-wrap justify-center"
           >
-            {["F", "E", "D", "C", "B", "A", "S", "SS", "SSS"].map((rank, i) => (
+            {[1, 2, 3, 4, 5, 6, 7].map((n) => (
               <span
-                key={rank}
-                className={`font-heading text-[9px] font-bold px-1.5 py-0.5 rounded ${
-                  i >= 7 ? "text-accent bg-accent/10" : i >= 5 ? "text-primary bg-primary/10" : "text-muted-foreground bg-muted/50"
+                key={n}
+                className={`font-heading text-[9px] font-bold px-2 py-0.5 rounded ${
+                  n >= 6
+                    ? "text-primary bg-primary/10"
+                    : n >= 4
+                    ? "text-secondary bg-secondary/10"
+                    : n >= 2
+                    ? "text-accent bg-accent/10"
+                    : "text-muted-foreground bg-muted/50"
                 }`}
               >
-                {rank}
+                {"★".repeat(n)}
               </span>
             ))}
           </motion.div>
