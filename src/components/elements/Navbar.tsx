@@ -40,9 +40,6 @@ export default function Navbar() {
               <div className="container mx-auto flex items-center justify-between h-16 px-4">
                 {/* Logo */}
                 <button onClick={() => scrollTo("creator")} className="flex items-center gap-2 group">
-                  <div className="w-9 h-9 rounded-full gradient-portal animate-spin-slow flex items-center justify-center">
-                    <span className="font-heading font-black text-sm text-primary-foreground dark:text-foreground">FZ</span>
-                  </div>
                   <span className="font-heading font-bold text-sm tracking-wider text-foreground hidden sm:block">
                       FAWWAZ
                   </span>
