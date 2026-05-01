@@ -5,7 +5,9 @@
         "jsx": "react-jsx",
         "skipLibCheck": true,
         "strictNullChecks": true,
+        "noEmit": true,
         "allowImportingTsExtensions": true,
+        "types": ["node"],
         "paths": {
             "@/*": ["./src/*"],
         },
