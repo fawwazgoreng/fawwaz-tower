@@ -8,6 +8,7 @@ import CreatorSection from "@/components/sections/Floor100_Creator";
 import { JourneySection } from "@/components/sections/Floor75_Journey";
 import { CreationSection } from "@/components/sections/Floor50_Creation";
 import { AscentSection } from "@/components/sections/Floor25_Ascent";
+import { PortalSection } from "@/components/sections/Floor0_Portal";
 
 export default function LandingPage() {
     const [towerMode, setTowerMode] = useState(false);
@@ -37,6 +38,7 @@ export default function LandingPage() {
                 <JourneySection />
                 <CreationSection />
                 <AscentSection />
+                <PortalSection />
             </motion.div>
         </>
     );
