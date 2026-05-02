@@ -9,5 +9,11 @@ export const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
         storage: localStorage,
         persistSession: true,
         autoRefreshToken: true,
+        flowType: "pkce"
     },
+    global: {
+        headers: {
+            "x-app-version": '1.0.0'
+        }
+    }
 });
