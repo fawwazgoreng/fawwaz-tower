@@ -1,16 +1,17 @@
-import z from "zod";
+import { z } from "zod";
 
-const env = z.object({
-    VITE_SUPABASE_ANON_KEY: z.url(),
-    VITE_SUPABASE_URL: z.string()
+const envSchema = z.object({
+  VITE_SUPABASE_ANON_KEY: z.string().min(1),
+  VITE_SUPABASE_URL: z.url(),
 });
 
-const parsedEnv = env.safeParse(process.env);
+const parsedEnv = envSchema.safeParse(import.meta.env);
 
-if (parsedEnv.error) {
-    console.log("Invalid environment set" + parsedEnv.error.format);
-    console.log(parsedEnv.error.message);
-    process.exit(1);
+if (!parsedEnv.success) {
+  console.error("❌ Invalid environment variables");
+  console.error(parsedEnv.error.format);
+
+  throw new Error("Invalid environment variables");
 }
 
-export default parsedEnv.data;
+export const env = parsedEnv.data;
