@@ -4,7 +4,7 @@ CREATE TABLE public.echoes (
   user_id     UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
   name        TEXT DEFAULT 'anonymous',
   floor       INTEGER DEFAULT 0,
-  rank        TEXT DEFAULT '★',
+  rank        TEXT DEFAULT 'F',
   title       TEXT,
   created_at  TIMESTAMPTZ DEFAULT NOW()
 );
