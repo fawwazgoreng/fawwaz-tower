@@ -22,6 +22,12 @@ ON public.profiles FOR UPDATE
 TO authenticated 
 USING (auth.uid() = id);
 
+-- Only the owner can delete their profile
+CREATE POLICY "Users can delete own profile" 
+ON public.profiles FOR DELETE 
+TO authenticated 
+USING (auth.uid() = id);
+
 -- Trigger function
 CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS TRIGGER AS $$
