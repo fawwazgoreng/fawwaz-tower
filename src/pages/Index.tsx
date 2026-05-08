@@ -9,7 +9,7 @@ import { JourneySection } from "@/components/sections/Floor75_Journey";
 import { CreationSection } from "@/components/sections/Floor50_Creation";
 import { AscentSection } from "@/components/sections/Floor25_Ascent";
 import { PortalSection } from "@/components/sections/Floor0_Portal";
-import EchoesSection from "@/components/sections/SpecialFloor_Echoes";
+import EchoesSection from "@/components/sections/HallOfEchoes";
 
 export default function LandingPage() {
     const [towerMode, setTowerMode] = useState(false);
