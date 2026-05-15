@@ -67,7 +67,7 @@ export default function EchoesSection() {
     }, []);
   
     const signIn = async () => {
-      await signInWithOauth("google");
+      await signInWithOauth("github");
     };
   
     const signOut = async () => {
