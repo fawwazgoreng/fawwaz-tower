@@ -16,4 +16,7 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
             "x-app-version": "1.0.0",
         },
     },
+    db: {
+        schema: "public"
+    }
 });
