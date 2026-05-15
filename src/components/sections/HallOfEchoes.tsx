@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useState , useRef, useEffect } from "react";
 import { useInView } from "framer-motion";
 import { Echo } from "@/types/echo.type";
-import { GetAllEchoes } from "@/integrations/supabase/echoes";
+import { CreateEcho, GetAllEchoes } from "@/integrations/supabase/echoes";
 import EchoesList from "../elements/EchoesList";
 import { Loader2, LogIn, LogOut, Send } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -80,7 +80,14 @@ export default function EchoesSection() {
       setSubmitting(true);
   
       const title = floorTitle(floor);
-      await (supabase).from("echoes").insert([{ message, author, floor, rank, title }]);
+      await CreateEcho({
+        message,
+        name: author,
+        floor,
+        rank,
+        title,
+        user_id: user.id,
+      });
   
       setMessage("");
       setSubmitting(false);

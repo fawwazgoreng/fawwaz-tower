@@ -13,5 +13,6 @@ export type CreateEchoType = {
     name: string,
     floor: number,
     rank: string,
-    title: string
+    title: string,
+    user_id: string
 }
