@@ -2,6 +2,9 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { ExternalLink, Sparkles , Code2} from "lucide-react";
 import FawwazTowerLogo from "@/assets/fawwaz-tower.png";
+import FadarosiLogo from "@/assets/fadarosi.png";
+import ArchiveLogo from "@/assets/archive.png"
+
 
 const projects = [
   {
@@ -12,6 +15,24 @@ const projects = [
     image: FawwazTowerLogo,
     demo: "https://github.com/fawwazgoreng/fawwaz-tower",
     github: "https://github.com/fawwazgoreng/fawwaz-tower",
+  },
+  {
+    title: "Fadarosi",
+    desc: "A cinematic dark fantasy portfolio inspired by Pick Me Up: Infinite Gacha",
+    tags: ["React", "TypeScript"],
+    color: "from-secondary/20 to-primary/20",
+    image: FadarosiLogo,
+    demo: "https://github.com/fawwazgoreng/laundry",
+    github: "https://github.com/fawwazgoreng/",
+  },
+    {
+    title: "Archive",
+    desc: "A cinematic dark fantasy portfolio inspired by Pick Me Up: Infinite Gacha",
+    tags: ["Astro", "Github Page"],
+    color: "from-primary/20 to-secondary/20",
+    image: ArchiveLogo,
+    demo: "https://github.com/fawwazgoreng/fawwazgoreng.github.io",
+    github: "https://github.com/fawwazgoreng/fawwazgoreng.github.io",
   },
 ];
 
